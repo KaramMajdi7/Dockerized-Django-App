@@ -1,0 +1,11 @@
+version: "3.8" # what version of docker-compose syntax to use
+services: # services we want to run 
+  app:
+    build: .
+    volumes: # describing a foldr that resied on our local machine that we want to share with the container
+      - .:/django
+    ports: # ports we want to expose
+      - 8000:8000
+    image: app:django # name of the image we want to build
+    container_name: django_container # name of the container we want to build
+    command: python manage.py runserver 0.0.0.0:8000 # command we want to run when we start the container
