@@ -9,3 +9,17 @@ services: # services we want to run
     image: app:django # name of the image we want to build
     container_name: django_container # name of the container we want to build
     command: python manage.py runserver 0.0.0.0:8000 # command we want to run when we start the container
+    depends_on: # what services we want to run before we run this service
+      - db
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: postgres_db
+
+
+
